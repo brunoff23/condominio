@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Sistema BIS</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{@BASE}}App/Views/src/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{@BASE}}App/Views/src/css/login.css">
+</head>
+
+<body>
+    <section class="hero is-success is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-grey">Sistema de Login</h3>
+                
+                    <check if="{{ @SESSION.erro == '1' }}"> <!--Erro 1 = Usuário ou senha inválidos -->
+                        <true>
+                            <div class="notification is-danger">
+                                <p>ERRO: Usuário ou senha inválidos.</p>
+                            </div>
+                        </true>
+                    </check>
+
+                    <check if="{{ @SESSION.erro == 2 }}"> <!-- Erro 2 = Usuário sem permissão -->
+                        <true>
+                            <div class="notification is-danger">
+                                <p>ERRO: Acesso não autorizado!</p>
+                            </div>
+                        </true>
+                    </check>
+
+                    <check if="{{ @SESSION.erro == 3 }}"> <!-- Erro 3 = Login ainda pendente de aprovação -->
+                        <true>
+                            <div class="notification is-danger">
+                                <p>ERRO: Login aguardando aprovação</p>
+                            </div>
+                        </true>
+                    </check>
+                    
+                    <div class="box">
+                        <form action="/auth" method="POST">
+                            <div class="field">
+                                <div class="control">
+                                    <input name="username" name="text" class="input is-large" placeholder="Seu usuário" autocomplete="off" required autofocus="">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <input name="password" class="input is-large" type="password" autocomplete="off" placeholder="Sua senha" required>
+                                </div>
+                            </div>
+                            <button type="submit" name="acao" class="button is-block is-link is-large is-fullwidth">Entrar</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

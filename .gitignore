@@ -1,0 +1,7 @@
+config/
+composer.json
+tmp/
+composer.lock
+.htaccess
+Adminer.php
+vendor/

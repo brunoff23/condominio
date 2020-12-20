@@ -1,0 +1,7 @@
+html body .container {
+    min-width: 360px;
+}
+
+html body {
+    min-width: 360px;
+}
