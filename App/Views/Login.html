@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Sistema BIS</title>
+    <title>Login - Sistema Condomínio</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="{{@BASE}}App/Views/src/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="{{@BASE}}App/Views/src/css/login.css">
@@ -18,7 +18,11 @@
                 <div class="column is-4 is-offset-4">
                     <h3 class="title has-text-grey">Sistema de Login</h3>
                 
-                    <check if="{{ @SESSION.erro == '1' }}"> <!--Erro 1 = Usuário ou senha inválidos -->
+                    <!-- Erro 1 = Usuário ou senha inválidos        -->
+                    <!-- Erro 2 = Usuário sem permissão             -->
+                    <!-- Erro 3 = Login ainda pendente de aprovação -->
+
+                    <check if="{{ @SESSION.erro === 1 }}"> 
                         <true>
                             <div class="notification is-danger">
                                 <p>ERRO: Usuário ou senha inválidos.</p>
@@ -26,7 +30,7 @@
                         </true>
                     </check>
 
-                    <check if="{{ @SESSION.erro == 2 }}"> <!-- Erro 2 = Usuário sem permissão -->
+                    <check if="{{ @SESSION.erro === 2 }}"> 
                         <true>
                             <div class="notification is-danger">
                                 <p>ERRO: Acesso não autorizado!</p>
@@ -34,7 +38,7 @@
                         </true>
                     </check>
 
-                    <check if="{{ @SESSION.erro == 3 }}"> <!-- Erro 3 = Login ainda pendente de aprovação -->
+                    <check if="{{ @SESSION.erro === 3 }}"> 
                         <true>
                             <div class="notification is-danger">
                                 <p>ERRO: Login aguardando aprovação</p>
