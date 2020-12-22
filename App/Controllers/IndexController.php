@@ -29,7 +29,7 @@ class IndexController extends Controller {
             
             
         } else if (is_integer($pesquisa)) {
-            
+            $f3->
         }
     }
 }
