@@ -2,14 +2,9 @@
 
 class Controller {
 
-    protected $f3 = null;
     protected $db;
 
-    public function __construct() {
-        
-        $f3 = Base::instance();
-        $this->f3 = $f3;
-        
+    public function __construct(\Base $f3) {
 
         try{
             $db = new DB\SQL(
@@ -25,6 +20,12 @@ class Controller {
         } catch(Exception $e) {
             echo $e;
         }
-        
+    }
+
+    public function checkLogin(\Base $f3) {
+        if(!$f3->get('SESSION.logged')) {
+            $f3->set('SESSION.erro', 2);
+            $f3->reroute('/login');
+        }
     }
 }

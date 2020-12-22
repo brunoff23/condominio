@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{@BASE}}App/Views/src/css/bootstrap.css">
+    <link rel="stylesheet" href="{{@BASE}}App/Views/src/css/style.css">
+    <title>Informações Conquista Premium Monte Castelo</title>
+</head>
+<body>
+    
+    <div class="container col-11">
+        <include href="templates/navbar.html" />
+        
+        <form class="m-4" action="/search" method="GET">
+            <div class="form-group">
+                <label for="pesquisa">Buscar Apartamentos, Proprietários ou Vagas</label>
+                <input type="text" class="form-control" name="pesquisa" id="pesquisa" required autofocus>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Buscar">
+        </form>
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>AP.</th>
+                    <th>BL.</th>
+                    <th>Vaga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <repeat group="{{ @apartamentos }}" value="{{ @apartamento }}">
+                    <tr>
+                        <td>{{ @apartamento.nome }}</td>
+                        <td>{{ @apartamento.numero }}</td>
+                        <td>{{ @apartamento.bloco }}</td>
+                        <td>{{ @apartamento.vaga }}</td>
+                    </tr>
+                </repeat>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
