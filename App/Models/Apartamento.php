@@ -16,12 +16,10 @@ class Apartamento extends DB\SQL\Mapper {
     }
 
     public function getByNumber($number) {
-        $this->load(["numero = ?", $number]);
-        return $this->query;
+        return $this->find(["numero = ? OR vaga = ?", $number, $number]);
     }
 
     public function getByName($name) {
-        $this->load(["nome like ?", "%".$name."%"]);
-        return $this->query;
+        return $this->find(["nome like ?", "%".$name."%"]);
     }
 }

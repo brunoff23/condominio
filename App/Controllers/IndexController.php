@@ -9,27 +9,27 @@ class IndexController extends Controller {
         echo $template->render('Index.html');
     }
 
-    public function search(\Base $f3, array $args = []) {
+    public function search(\Base $f3) {
         $pesquisa = $f3->get('GET.pesquisa');
         $apartamento = new Apartamento($this->db);
 
         //Se a pesquisa for uma string
-        if(is_string($pesquisa)) {
-            $apartamento->getByName($pesquisa);
-            $f3->set('apartamentos', null);
-            $count = $apartamento->count(["nome like ?", "%".$pesquisa."%"]);
-            for($i = 0; $i < $count; $i++) {
-                $f3->push('apartamentos', $apartamento->cast());
-                $apartamento->skip();
-            }
-            echo "<pre>";
-            var_dump($f3->get('apartamentos'));
-            echo "</pre>";
+        if(preg_match('/[a-zA-Z]/', $pesquisa)) {
+
+            $dados = $apartamento->getByName($pesquisa);
+            $f3->set('apartamentos', $dados);
             
+            $template = Template::instance();
+            echo $template->render('Index.html');
+
+        //Se a pesquisa for um integer
+        } else if(preg_match('/[0-9]/', $pesquisa)) {
+
+            $dados = $apartamento->getByNumber($pesquisa);
+            $f3->set('apartamentos', $dados);
             
-            
-        } else if (is_integer($pesquisa)) {
-            $f3->
+            $template = Template::instance();
+            echo $template->render('Index.html');
         }
     }
 }

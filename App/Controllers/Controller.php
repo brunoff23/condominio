@@ -5,7 +5,7 @@ class Controller {
     protected $db;
 
     public function __construct(\Base $f3) {
-
+        
         try{
             $db = new DB\SQL(
                 $f3->get('devdb_config'),

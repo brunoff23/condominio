@@ -30,16 +30,17 @@
                 </tr>
             </thead>
             <tbody>
-                <repeat group="{{ @apartamentos }}" value="{{ @apartamento }}">
+                <repeat group="{{ @apartamentos }}" value="{{ @item }}">
                     <tr>
-                        <td>{{ @apartamento.nome }}</td>
-                        <td>{{ @apartamento.numero }}</td>
-                        <td>{{ @apartamento.bloco }}</td>
-                        <td>{{ @apartamento.vaga }}</td>
+                        <td>{{ @item.nome }}</td>
+                        <td>{{ @item.numero }}</td>
+                        <td>{{ @item.bloco }}</td>
+                        <td>{{ @item.vaga }}</td>
                     </tr>
                 </repeat>
             </tbody>
         </table>
+        
     </div>
 </body>
 </html>
