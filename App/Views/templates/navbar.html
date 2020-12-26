@@ -1,9 +1,33 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+  
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <check if="{{ @SESSION.fullName }}">
+                    <true>
+                        <span>
+                            {{ @SESSION.fullName }}
+                        </span>
+                    </true>
+                </check>
+            </div>
 
-<ul class="nav justify-content-end">
-    <li class="nav-item disable">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ @SESSION.username }}</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" href="/logout">Deslogar</a>
-    </li>
-</ul>
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-danger" href="/logout">
+                        Deslogar  
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </nav>

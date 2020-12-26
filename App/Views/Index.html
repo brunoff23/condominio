@@ -3,44 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{@BASE}}App/Views/src/css/bootstrap.css">
-    <link rel="stylesheet" href="{{@BASE}}App/Views/src/css/style.css">
+    <link rel="stylesheet" href="{{@BASE}}App/Views/src/css/bulma.min.css">
     <title>Informações Conquista Premium Monte Castelo</title>
 </head>
 <body>
-    
-    <div class="container col-11">
+    <section class="hero is-fullheight">
         <include href="templates/navbar.html" />
-        
-        <form class="m-4" action="/search" method="GET">
-            <div class="form-group">
-                <label for="pesquisa">Buscar Apartamentos, Proprietários ou Vagas</label>
-                <input type="text" class="form-control" name="pesquisa" id="pesquisa" required autofocus>
+        <div class="container has-text-centered">
+            <div class="columns">
+                <form class="column is-6 is-offset-3" action="/search" method="GET">
+                    <div class="field">
+                        <label class="label has-text-grey">Buscar Apartamentos, Proprietários ou Vagas</label>
+                        <div class="control">
+                            <input class="input" type="text" name="pesquisa" placeholder="Pesquisar" required autofocus>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-link">Buscar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <input type="submit" class="btn btn-primary" value="Buscar">
-        </form>
-    
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>AP.</th>
-                    <th>BL.</th>
-                    <th>Vaga</th>
-                </tr>
-            </thead>
-            <tbody>
-                <repeat group="{{ @apartamentos }}" value="{{ @item }}">
-                    <tr>
-                        <td>{{ @item.nome }}</td>
-                        <td>{{ @item.numero }}</td>
-                        <td>{{ @item.bloco }}</td>
-                        <td>{{ @item.vaga }}</td>
-                    </tr>
-                </repeat>
-            </tbody>
-        </table>
         
-    </div>
+            <div class="columns">
+                <check if="{{ @apartamentos }}">
+                    <true>
+                        <table class="table column is-6 is-offset-3 is-striped is-hoverable">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Apto.</th>
+                                    <th>Bloco</th>
+                                    <th>Vaga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <repeat group="{{ @apartamentos }}" value="{{ @item }}">
+                                    <tr>
+                                        <td>{{ @item.nome }}</td>
+                                        <td>{{ @item.numero }}</td>
+                                        <td>{{ @item.bloco }}</td>
+                                        <td>{{ @item.vaga }}</td>
+                                    </tr>
+                                </repeat>
+                            </tbody>
+                        </table>
+                    </true>
+                </check>        
+            </div>
+        </div>
+        <include href="templates/footer.html" />
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Check if there are any navbar burgers
+            if ($navbarBurgers.length > 0) {
+
+                // Add a click event on each of them
+                $navbarBurgers.forEach( el => {
+                    el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                    });
+                });
+            }
+
+        });
+    </script>
 </body>
 </html>

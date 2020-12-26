@@ -3,6 +3,12 @@
 class LoginController extends Controller {
 
     public function render(\Base $f3) {
+
+        //Se já estiver logado redireciona para Index.
+        if(($f3->get('SESSION.logged') == true)) {
+            $f3->reroute('/index');
+            die();
+        }
     
         $template = Template::instance();
         echo $template->render('Login.html');
@@ -23,7 +29,7 @@ class LoginController extends Controller {
 
         if(password_verify($password, $user->password)) {
             $f3->set('SESSION.logged', true , 86400);
-            $f3->set('SESSION.username', $username);
+            $f3->set('SESSION.fullName', $user->fullName);
             $f3->reroute('/index');
         } else {
             $f3->set('SESSION.erro', 1);
@@ -33,7 +39,7 @@ class LoginController extends Controller {
     }
 
     public function logout(\Base $f3) {
-        $f3->clear('SESSION.username');
+        $f3->clear('SESSION.logged');
         $f3->reroute('login');
     }
 }
